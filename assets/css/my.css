@@ -1,0 +1,70 @@
+body {
+  width: 100%;
+  background: url("../img/main.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.quiz {
+  width: 35rem;
+  border-radius: 15px;
+  position: relative;
+  margin-top: 3rem;
+  min-height: 30rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.wrap_image_question {
+  width: 200px;
+  height: 200px;
+}
+div.card {
+  border-radius: 15px;
+}
+
+div.materi {
+  border-radius: 15px;
+  position: relative;
+  margin-top: 3rem;
+  min-height: 30rem;
+  max-height: 60rem;
+  overflow-y: scroll;
+  width: 75%;
+  padding: 4rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+div.video_content {
+  border-radius: 15px;
+  position: relative;
+  margin-top: 3rem;
+  min-height: 30rem;
+  max-height: 60rem;
+  width: 75%;
+  padding: 4rem;
+}
+.submit {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+}
+img.answer {
+  width: 100px;
+  height: 100px;
+}
+.question_tebak {
+}
+@media screen and (max-width: 500px) {
+  .quiz {
+    width: 25rem;
+  }
+  div.materi {
+    width: 90%;
+  }
+  body {
+    background: url("../img/main2.jpg") no-repeat center center fixed;
+  }
+}
