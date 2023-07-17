@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2023 at 11:22 AM
+-- Generation Time: Jul 11, 2023 at 01:04 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -116,7 +116,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `parent_name`, `child_name`, `email`, `password`) VALUES
 (1, 'Ade', 'Rafif Harmanto', 'ade@gmail.com', '$2y$10$dI1IaBMm1MoFKOr8qnycMOUAIBi1MdDo1RAeMdvWWbkalvmZT2I66'),
-(2, 'Yanto', 'Rizki', 'yanto@gmail.com', '$2y$10$YZoiTFfDzyJcY25OYgeO.eRTW7PEmSOIl3pl2J56KNdtS11GQ/sW2');
+(2, 'Yanto', 'Rizki', 'yanto@gmail.com', '$2y$10$YZoiTFfDzyJcY25OYgeO.eRTW7PEmSOIl3pl2J56KNdtS11GQ/sW2'),
+(3, 'Ade', 'Rafif Harmanto', 'iq@dev.com', '$2y$10$7gcSDyp2a65/fpBE2fdDQ.DEFUb8v3t/BFu04ATcGBMq3p6ioxNsW');
 
 --
 -- Indexes for dumped tables
@@ -161,7 +162,7 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
