@@ -28,8 +28,7 @@ ob_start();
     <link href="assets/css/admin.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="assets-template/dist/css/adminlte.min.css">
-    <!-- apex-chart -->
-    <link rel="stylesheet" href="assets-template/plugins/apex-chart/apexcharts.css">
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="assets-template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
