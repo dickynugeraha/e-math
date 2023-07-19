@@ -35,7 +35,7 @@ function loginAdmin($post)
     $pass = validate($password);
 
     if (empty($username)) {
-        header("Location: login-admin.php?error=User Name is required");
+        header("Location: login-admin.php?error=Username is required");
         exit();
     } else if (empty($pass)) {
         header("Location: login-admin.php?error=Password is required");
@@ -49,6 +49,7 @@ function loginAdmin($post)
             $row = mysqli_fetch_assoc($result);
             if ($row['username'] === $username && $row['password'] === $pass) {
                 $_SESSION['username'] = $row['username'];
+                $_SESSION['adminId'] = $row['id'];
                 header("Location: dashboard.php");
                 exit();
             } else {
@@ -93,6 +94,7 @@ function loginUser($post)
         return;
     }
     $_SESSION['email'] = $row['email'];
+    $_SESSION['name'] = $row['child_name'];
     $_SESSION['userId'] = $row['id'];
     echo "<script>
         alert('Login berhasil!');
@@ -140,4 +142,153 @@ function registerUser($post)
         </script>";
     exit();
     return;
+}
+// ---------------------------------------------- FUNGSI QUIZ -------------------------------------------------------
+function createQuiz($post)
+{
+    global $db;
+
+    $question = $post['question'];
+    $type = $post['type'];
+    $a = $post['a'];
+    $b = $post['b'];
+    $c = $post['c'];
+    $d = $post['d'];
+    $img = $post['img'];
+    $correct = $post['correct'];
+    $description_answer = $post['description'];
+
+    // var_dump($post);
+    // die();
+
+    $query = "INSERT INTO quiz VALUES (null, '$type', '$question', '$img')";
+    mysqli_query($db, $query);
+
+    $quiz_latest = select("SELECT * FROM quiz ORDER BY id DESC");
+    $quizId = $quiz_latest[0]["id"];
+
+    $query2 = "INSERT INTO answers VALUES (null, $quizId, '$a','$b', '$c', '$d', '$correct', '$description_answer')";
+    mysqli_query($db, $query2);
+
+    return mysqli_affected_rows($db);
+}
+
+function deleteQuiz($id)
+{
+    global $db;
+
+    $query = "DELETE FROM quiz WHERE id = $id";
+
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+
+function updateTebakGambar($post)
+{
+    global $db;
+
+    $question = $post["question"];
+    $quizId = $post["quizId"];
+    $a = $post["a"];
+    $b = $post["b"];
+    $c = $post["c"];
+    $d = $post["d"];
+    $correct = $post["correct"];
+
+    $query = "UPDATE quiz t1 
+    JOIN answers t2 ON (t1.id = t2.quizId) 
+    SET t1.question = '$question', 
+        t2.a = '$a', 
+        t2.b = '$b', 
+        t2.c = '$c', 
+        t2.d = '$d', 
+        t2.correct = '$correct' 
+    WHERE t1.id = '$quizId'";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+function updatePilihanGanda($post)
+{
+    global $db;
+
+    $question = $post["question"];
+    $img = $post["img"];
+    $quizId = $post["quizId"];
+    $a = $post["a"];
+    $b = $post["b"];
+    $c = $post["c"];
+    $d = $post["d"];
+    $correct = $post["correct"];
+    $description = $post["description"];
+
+
+    $query = "UPDATE quiz t1 
+    LEFT JOIN answers t2 ON (t1.id = t2.quizId) 
+    SET t1.question = '" . $question . "',
+        t1.img = '" . $img . "',
+        t2.a = '" . $a . "',
+        t2.b = '" . $b . "',
+        t2.c = '" . $c . "',
+        t2.d = '" . $d . "', 
+        t2.correct = '" . $correct . "',
+        t2.description = '" . $description . "'
+    WHERE t2.id = '" . $quizId . "'";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+
+// ---------------------------------------------------------- FUNGSI REPORT --------------------------------------------
+
+function createNilai($post)
+{
+    global $db;
+    $userId = $post["userId"];
+    $nilai = $post["nilai"];
+    $type = $post["type"];
+
+    $query = "INSERT INTO reports VALUES (null, '$userId', '$nilai', '$type')";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+
+// ------------------------------------------ FUNGSI FORUM ---------------------------------------------------
+
+function createForum($post)
+{
+    global $db;
+    $title = $post["title"];
+
+    $query = "INSERT INTO forum VALUES (null, '$title', null)";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+
+function deleteForum($id)
+{
+    global $db;
+
+    $query = "DELETE FROM forum WHERE id = $id";
+
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
+
+function createDiskusi($post)
+{
+    global $db;
+    $forumId = $post["forumId"];
+    $name = $post["name"];
+    $description = $post["description"];
+    $user_status = $post["user_status"];
+
+    $query = "INSERT INTO forum_item VALUES (null, '$name', '$description', '$forumId', '$user_status', null)";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
 }
